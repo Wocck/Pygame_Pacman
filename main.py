@@ -1,7 +1,7 @@
 import pygame
-import player_class
+from player_class import Player
 import settings
-import sys
+from maze_grid import Block
 
 
 class Game:
@@ -10,17 +10,27 @@ class Game:
         self.screen = pygame.display.set_mode(
             (settings.WIN_WIDTH, settings.WIN_HEIGHT)
         )
+        self.maze_image = pygame.image.load('maze.png').convert()
         self.clock = pygame.time.Clock()
         self.font_name = '8-BIT WONDER.TTF'
         self.running = True
+
+    def create_map(self):
+        for i, row in enumerate(settings.map):
+            for j, column in enumerate(row):
+                if column == '.':
+                    Block(self, j, i)
+                elif column == 'P':
+                    Player(self, j * 20, i * 20)    # 1 dot == 20 Pixels
+                else:
+                    pass
 
     def new(self):
         self.playing = True
         self.all_sprites = pygame.sprite.LayeredUpdates()
         self.blocks = pygame.sprite.LayeredUpdates()
-        self.enemies = pygame.sprite.LayeredUpdates()
-
-        self.player = player_class.Player(self, 1, 2)
+        self.maze = pygame.sprite.LayeredUpdates()
+        self.create_map()
 
     def events(self):
         # Game Loop Events
@@ -34,7 +44,7 @@ class Game:
         self.all_sprites.update()
 
     def draw(self):
-        self.screen.fill(settings.BLACK)
+        self.screen.blit(self.maze_image, (0, 0))
         self.all_sprites.draw(self.screen)
         self.clock.tick(settings.FPS)
         pygame.display.update()
