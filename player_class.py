@@ -13,6 +13,9 @@ class Player(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self, self.groups)
 
         self.starting_pos = (x, y)
+        self.x_change = 0
+        self.y_change = 0
+
         self.width = settings.TILESIZE
         self.height = settings.TILESIZE
 
@@ -23,7 +26,20 @@ class Player(pygame.sprite.Sprite):
         self.rect.x, self.rect.y = self.starting_pos
 
     def update(self):
-        pass
+        self.movement()
+        self.rect.x += self.x_change
+        self.rect.y += self.y_change
+
+        self.x_change = 0
+        self.y_change = 0
 
     def movement(self):
         keys = pygame.key.get_pressed()
+        if keys[pygame.K_RIGHT]:
+            self.x_change += settings.PLAYER_SPEED
+        if keys[pygame.K_LEFT]:
+            self.x_change -= settings.PLAYER_SPEED
+        if keys[pygame.K_UP]:
+            self.y_change -= settings.PLAYER_SPEED
+        if keys[pygame.K_DOWN]:
+            self.y_change += settings.PLAYER_SPEED
