@@ -1,5 +1,5 @@
 import pygame
-from player_class import Player
+from player import Player
 import settings
 from maze_grid import Block
 
@@ -10,9 +10,9 @@ class Game:
         self.screen = pygame.display.set_mode(
             (settings.WIN_WIDTH, settings.WIN_HEIGHT)
         )
-        self.maze_image = pygame.image.load('maze.png').convert()
+        self.maze_image = pygame.image.load(settings.MAZE_IMG).convert()
         self.clock = pygame.time.Clock()
-        self.font_name = '8-BIT WONDER.TTF'
+        self.font_name = settings.FONT_ONE
         self.running = True
 
     def create_map(self):

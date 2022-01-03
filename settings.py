@@ -1,22 +1,29 @@
 # Main Window
 WIN_WIDTH = 560
 WIN_HEIGHT = 620
-PLAYER_SIZE = 20
 BLOCK_SIZE = 20
-
 
 # Layers
 PLAYER_LAYER = 3
-BLOCK_LAYER = 1
 MAZE_LAYER = 2
+BLOCK_LAYER = 1
 
 # FPS
 FPS = 60
 
 # PLAYER
 PLAYER_SPEED = 2
+PLAYER_SIZE = 20
 
-# #OLORS
+# IMAGES
+PACMAN_IMG_20P = 'images/pac_man_20pix.png'
+PACMAN_IMG_18P = 'images/pac_man_18pix.png'
+PACMAN_IMG_17P = 'images/pac_man_17pix.png'
+MAZE_IMG = 'images/maze.png'
+
+# FONTS
+FONT_ONE = '8-BIT WONDER.TTF'
+# COLORS
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)

@@ -17,7 +17,7 @@ class Player(pygame.sprite.Sprite):
         self.width = settings.PLAYER_SIZE
         self.height = settings.PLAYER_SIZE
 
-        self.image = pygame.image.load('pac_man_20pix.png')
+        self.image = pygame.image.load(settings.PACMAN_IMG_20P).convert()
 
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = self.starting_pos
