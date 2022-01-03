@@ -1,0 +1,19 @@
+# Main Window
+WIN_WIDTH = 640
+WIN_HEIGHT = 480
+TILESIZE = 32
+
+# Layers
+PLAYER_LAYER = 1
+
+# FPS
+FPS = 60
+# COLORS
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+BLACK = (0, 0, 0)
+RED = (208, 22, 22)
+GREY = (107, 107, 107)
+WHITE = (255, 255, 255)
+PLAYER_COLOUR = (190, 194, 15)
