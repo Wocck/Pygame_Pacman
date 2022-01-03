@@ -19,8 +19,7 @@ class Player(pygame.sprite.Sprite):
         self.width = settings.TILESIZE
         self.height = settings.TILESIZE
 
-        self.image = pygame.Surface([self.width, self.height])
-        self.image.fill(settings.RED)
+        self.image = pygame.image.load('pac_man.png')
 
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = self.starting_pos
