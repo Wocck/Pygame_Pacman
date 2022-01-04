@@ -1,7 +1,7 @@
 import pygame
 from player import Player
 import settings
-from maze_grid import Block
+from maze_grid import Block, Coin
 
 
 class Game:
@@ -21,15 +21,16 @@ class Game:
                 if column == '.':
                     Block(self, j, i)
                 elif column == 'P':
-                    Player(self, j * 20, i * 20)    # 1 dot == 20 Pixels
-                else:
-                    pass
+                    Player(self, j, i)
+                elif column == '#':
+                    Coin(self, j, i)
 
     def new(self):
         self.playing = True
         self.all_sprites = pygame.sprite.LayeredUpdates()
         self.blocks = pygame.sprite.LayeredUpdates()
         self.maze = pygame.sprite.LayeredUpdates()
+        self.coins = pygame.sprite.LayeredUpdates()
         self.create_map()
 
     def events(self):

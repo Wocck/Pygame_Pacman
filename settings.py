@@ -1,10 +1,11 @@
 # Main Window
 WIN_WIDTH = 560
 WIN_HEIGHT = 620
-BLOCK_SIZE = 20
+TILE_SIZE = 20
 
 # Layers
-PLAYER_LAYER = 3
+PLAYER_LAYER = 4
+COINS_LAYER = 3
 MAZE_LAYER = 2
 BLOCK_LAYER = 1
 
@@ -15,14 +16,21 @@ FPS = 60
 PLAYER_SPEED = 2
 PLAYER_SIZE = 20
 
+# COINS
+COIN_SIZE = 10
+
 # IMAGES
 PACMAN_IMG_20P = 'images/pac_man_20pix.png'
 PACMAN_IMG_18P = 'images/pac_man_18pix.png'
 PACMAN_IMG_17P = 'images/pac_man_17pix.png'
 MAZE_IMG = 'images/maze.png'
+COIN_IMG_16P = 'images/virus_2.png'
+COIN_IMG_8P = 'images/dot_8pix.png'
+COIN_IMG_10P = 'images/dot_10pix.png'
 
 # FONTS
 FONT_ONE = '8-BIT WONDER.TTF'
+
 # COLORS
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
