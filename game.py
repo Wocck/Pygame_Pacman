@@ -1,4 +1,5 @@
 import pygame
+from enemy import Enemy
 from player import Player
 import settings
 from maze_grid import Block, Coin
@@ -25,11 +26,14 @@ class Game:
                     self.player = Player(self, j, i)
                 elif column == "#":
                     Coin(self, j, i)
+                elif column == "E":
+                    Enemy(self, j, i)
 
     def new(self):
         self.playing = True
         self.all_sprites = pygame.sprite.LayeredUpdates()
         self.blocks = pygame.sprite.LayeredUpdates()
+        self.enemies = pygame.sprite.LayeredUpdates()
         self.maze = pygame.sprite.LayeredUpdates()
         self.coins = pygame.sprite.LayeredUpdates()
         self.create_map()
