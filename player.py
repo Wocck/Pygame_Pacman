@@ -15,10 +15,10 @@ class Player(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
 
-        self.width = settings.TILE_SIZE
-        self.height = settings.TILE_SIZE
+        self.width = settings.PLAYER_SIZE
+        self.height = settings.PLAYER_SIZE
 
-        self.image = pygame.image.load(settings.PACMAN_IMG_20P).convert()
+        self.image = pygame.image.load(settings.PACMAN_IMG_18P).convert()
         self.rect = self.image.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y

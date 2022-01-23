@@ -18,7 +18,7 @@ class Game:
         self.running = True
 
     def create_map(self):
-        for i, row in enumerate(settings.map):
+        for i, row in enumerate(settings.MAP):
             for j, column in enumerate(row):
                 if column == ".":
                     Block(self, j, i)
@@ -28,6 +28,8 @@ class Game:
                     Coin(self, j, i)
                 elif column == "E":
                     Enemy(self, j, i)
+                elif column == "G":
+                    print(f'({j*20}, {i*20}),')
 
     def new(self):
         self.playing = True

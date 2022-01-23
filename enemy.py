@@ -13,8 +13,8 @@ class Enemy(pygame.sprite.Sprite):
 
         self.x = x * settings.TILE_SIZE
         self.y = y * settings.TILE_SIZE
-        self.width = settings.TILE_SIZE
-        self.height = settings.TILE_SIZE
+        self.width = settings.ENEMY_SIZE
+        self.height = settings.ENEMY_SIZE
 
         self.x_change = 0
         self.y_change = 0
@@ -45,6 +45,12 @@ class Enemy(pygame.sprite.Sprite):
                 if self.x_change < 0:
                     self.rect.x = hits[0].rect.right
                     self.dir = random.choice([1, 2, 4])
+            if (self.rect.x, self.rect.y) in settings.XY_CROSS:
+                self.dir = random.choice([1, 2, self.dir])
+            if (self.rect.x, self.rect.y) in settings.UP_CROSS_X_DIR:
+                self.dir = random.choice([1, self.dir])
+            if (self.rect.x, self.rect.y) in settings.DOWN_CROSS_X_DIR:
+                self.dir = random.choice([2, self.dir])
         if direction == 'y':
             hits = pygame.sprite.spritecollide(self, self.game.blocks, False)
             if hits:
@@ -54,6 +60,12 @@ class Enemy(pygame.sprite.Sprite):
                 if self.y_change < 0:
                     self.rect.y = hits[0].rect.bottom
                     self.dir = random.choice([1, 3, 4])
+            if (self.rect.x, self.rect.y) in settings.XY_CROSS:
+                self.dir = random.choice([3, 4, self.dir])
+            if (self.rect.x, self.rect.y) in settings.LEFT_CROSS_Y_DIR:
+                self.dir = random.choice([3, self.dir])
+            if (self.rect.x, self.rect.y) in settings.RIGHT_CROSS_Y_DIR:
+                self.dir = random.choice([4, self.dir])
 
     def movement(self):
         if self.dir == 1:   # Moving up
