@@ -28,9 +28,11 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         self.movement()
         self.rect.x += self.x_change
+        self.collide_enemy()
         self.collide_blocks('x')
         self.collide_coins()
         self.rect.y += self.y_change
+        self.collide_enemy()
         self.collide_blocks('y')
         self.collide_coins()
 
@@ -68,3 +70,9 @@ class Player(pygame.sprite.Sprite):
         hits = pygame.sprite.spritecollide(self, self.game.coins, True)
         if hits:
             self.points += 1
+
+    def collide_enemy(self):
+        hits = pygame.sprite.spritecollide(self, self.game.enemies, False)
+        if hits:
+            self.kill()
+            self.game.playing = False

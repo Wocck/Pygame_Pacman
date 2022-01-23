@@ -18,7 +18,7 @@ class Enemy(pygame.sprite.Sprite):
 
         self.x_change = 0
         self.y_change = 0
-        self.image = pygame.image.load(settings.ENEMY_IMG_20P).convert()
+        self.image = pygame.image.load(settings.GHOST_20P).convert()
         self.rect = self.image.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
@@ -28,44 +28,62 @@ class Enemy(pygame.sprite.Sprite):
     def update(self):
         self.movement()
         self.rect.x += self.x_change
-        self.collide_blocks('x')
         self.rect.y += self.y_change
-        self.collide_blocks('y')
+        self.collide_blocks(self.dir)
 
         self.x_change = 0
         self.y_change = 0
 
     def collide_blocks(self, direction):
-        if direction == 'x':
-            hits = pygame.sprite.spritecollide(self, self.game.blocks, False)
-            if hits:
+        pos = (self.rect.x, self.rect.y)
+        hits = pygame.sprite.spritecollide(self, self.game.blocks, False)
+        if direction in (3, 4):
+            # Crossing if's
+            if pos in settings.UP_SIDE_CROSS:
+                self.dir = random.choice([2, self.dir])
+            elif pos in settings.DOWN_SIDE_CROSS:
+                self.dir = random.choice([1, self.dir])
+            elif pos in settings.LEFT_SIDE_CROSS or\
+                    pos in settings.RIGHT_SIDE_CROSS:
+                self.dir = random.choice([1, 2])
+            elif pos in settings.CROSS:
+                self.dir = random.choice([1, 2, self.dir])
+            elif pos in settings.LEFT_UP_CORNER or\
+                    pos in settings.RIGHT_UP_CORNER:
+                self.dir = 2
+            elif pos in settings.LEFT_DOWN_CORNER or\
+                    pos in settings.RIGHT_DOWN_CORNER:
+                self.dir = 1
+            elif hits:
                 if self.x_change > 0:
                     self.rect.x = hits[0].rect.left - self.width
                     self.dir = random.choice([1, 2, 3])
                 if self.x_change < 0:
                     self.rect.x = hits[0].rect.right
                     self.dir = random.choice([1, 2, 4])
-            if (self.rect.x, self.rect.y) in settings.XY_CROSS:
-                self.dir = random.choice([1, 2, self.dir])
-            if (self.rect.x, self.rect.y) in settings.UP_CROSS_X_DIR:
-                self.dir = random.choice([1, self.dir])
-            if (self.rect.x, self.rect.y) in settings.DOWN_CROSS_X_DIR:
-                self.dir = random.choice([2, self.dir])
-        if direction == 'y':
-            hits = pygame.sprite.spritecollide(self, self.game.blocks, False)
-            if hits:
+        elif direction in (1, 2):
+            if pos in settings.UP_SIDE_CROSS or\
+                    pos in settings.DOWN_SIDE_CROSS:
+                self.dir = random.choice([3, 4])
+            elif pos in settings.LEFT_SIDE_CROSS:
+                self.dir = random.choice([self.dir, 4])
+            elif pos in settings.RIGHT_SIDE_CROSS:
+                self.dir = random.choice([self.dir, 3])
+            elif pos in settings.CROSS:
+                self.dir = random.choice([self.dir, 3, 4])
+            elif pos in settings.LEFT_UP_CORNER or\
+                    pos in settings.LEFT_DOWN_CORNER:
+                self.dir = 4
+            elif pos in settings.RIGHT_UP_CORNER or\
+                    pos in settings.RIGHT_DOWN_CORNER:
+                self.dir = 3
+            elif hits:
                 if self.y_change > 0:
                     self.rect.y = hits[0].rect.top - self.height
                     self.dir = random.choice([2, 3, 4])
                 if self.y_change < 0:
                     self.rect.y = hits[0].rect.bottom
                     self.dir = random.choice([1, 3, 4])
-            if (self.rect.x, self.rect.y) in settings.XY_CROSS:
-                self.dir = random.choice([3, 4, self.dir])
-            if (self.rect.x, self.rect.y) in settings.LEFT_CROSS_Y_DIR:
-                self.dir = random.choice([3, self.dir])
-            if (self.rect.x, self.rect.y) in settings.RIGHT_CROSS_Y_DIR:
-                self.dir = random.choice([4, self.dir])
 
     def movement(self):
         if self.dir == 1:   # Moving up

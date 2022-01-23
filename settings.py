@@ -26,6 +26,7 @@ COIN_SIZE = 10
 
 # IMAGES
 PACMAN_IMG_20P = 'images/pac_man_20pix.png'
+PACMAN_REL_IMG_20P = 'images/pac_man_real_20pix.png'
 PACMAN_IMG_18P = 'images/pac_man_18pix.png'
 PACMAN_IMG_17P = 'images/pac_man_17pix.png'
 MAZE_IMG = 'images/maze.png'
@@ -33,10 +34,12 @@ COIN_IMG_16P = 'images/virus_2.png'
 COIN_IMG_8P = 'images/dot_8pix.png'
 COIN_IMG_10P = 'images/dot_10pix.png'
 ENEMY_IMG_20P = 'images/enemy_20pix.png'
+GHOST_20P = 'images/ghost_20pix.png'
 
 # FONTS
-FONT_ONE = '8-BIT WONDER.TTF'
-FONT_TWO = 'ARCADECLASSIC.TTF'
+FONT_ONE = 'fonts/8-BIT WONDER.TTF'
+FONT_TWO = 'fonts/ARCADECLASSIC.TTF'
+FONT_THREE = 'fonts/arial.ttf'
 
 # COLORS
 RED = (255, 0, 0)
@@ -78,11 +81,12 @@ MAP = [
     '.######..####..####..######.',
     '.#..........#..#..........#.',
     '.#..........#..#..........#.',
-    '.########E###P#####E#######.',
+    '.############P#############.',
     '............................'
 ]
 
-DOWN_CROSS_X_DIR = [
+# ``|`` =
+UP_SIDE_CROSS = [
     (120, 20),
     (420, 20),
     (180, 100),
@@ -91,7 +95,8 @@ DOWN_CROSS_X_DIR = [
     (360, 460)
 ]
 
-UP_CROSS_X_DIR = [
+# _|_
+DOWN_SIDE_CROSS = [
     (240, 100),
     (300, 100),
     (240, 220),
@@ -106,7 +111,8 @@ UP_CROSS_X_DIR = [
     (300, 580)
 ]
 
-RIGHT_CROSS_Y_DIR = [
+# |-
+LEFT_SIDE_CROSS = [
     (420, 160),
     (120, 280),
     (360, 280),
@@ -114,7 +120,8 @@ RIGHT_CROSS_Y_DIR = [
     (120, 460)
 ]
 
-LEFT_CROSS_Y_DIR = [
+# -|
+RIGHT_SIDE_CROSS = [
     (120, 160),
     (180, 280),
     (420, 280),
@@ -122,9 +129,56 @@ LEFT_CROSS_Y_DIR = [
     (420, 460)
 ]
 
-XY_CROSS = [
+# -|-
+CROSS = [
     (120, 100),
     (420, 100),
     (120, 400),
     (420, 400)
+]
+
+# R = |``
+LEFT_UP_CORNER = [
+    (20, 20),
+    (300, 20),
+    (300, 160),
+    (180, 220),
+    (20, 400),
+    (300, 400),
+    (480, 460),
+    (20, 520),
+    (300, 520)
+]
+
+# L = ``|
+RIGHT_UP_CORNER = [
+    (240, 20),
+    (520, 20),
+    (240, 160),
+    (360, 220),
+    (240, 400),
+    (520, 400),
+    (60, 460),
+    (240, 520),
+    (520, 520)
+]
+
+# M = |_
+LEFT_DOWN_CORNER = [
+    (20, 160),
+    (180, 160),
+    (20, 460),
+    (180, 520),
+    (420, 520),
+    (20, 580)
+]
+
+# N = _|
+RIGHT_DOWN_CORNER = [
+    (360, 160),
+    (520, 160),
+    (520, 460),
+    (120, 520),
+    (360, 520),
+    (520, 580)
 ]

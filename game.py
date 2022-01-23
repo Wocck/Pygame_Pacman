@@ -13,7 +13,7 @@ class Game:
         )
         self.maze_image = pygame.image.load(settings.MAZE_IMG).convert()
         self.clock = pygame.time.Clock()
-        self.font_name = settings.FONT_ONE
+        self.font_name = settings.FONT_THREE
         self.score_font = pygame.font.Font(self.font_name, 35)
         self.running = True
 
@@ -28,8 +28,6 @@ class Game:
                     Coin(self, j, i)
                 elif column == "E":
                     Enemy(self, j, i)
-                elif column == "G":
-                    print(f'({j*20}, {i*20}),')
 
     def new(self):
         self.playing = True
@@ -61,7 +59,7 @@ class Game:
 
     def draw_score(self):
         score = self.player.points
-        text = f"Score = {score}"
+        text = f"Score = {score}/287"
         text_surface = self.score_font.render(text, False, settings.WHITE)
         text_rect = text_surface.get_rect()
         text_rect.x = 0
