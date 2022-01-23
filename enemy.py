@@ -18,17 +18,24 @@ class Enemy(pygame.sprite.Sprite):
 
         self.x_change = 0
         self.y_change = 0
-        self.image = pygame.image.load(settings.GHOST_20P).convert()
+
+        self.normal_image = pygame.image.load(settings.GHOST_20P).convert()
+        self.blue_image = pygame.image.load(settings.BLUE_GHOST_20P).convert()
+        self.image = self.normal_image
+        self.which_image = 'normal'
         self.rect = self.image.get_rect()
+
         self.rect.x = self.x
         self.rect.y = self.y
 
         self.dir = random.randint(1, 4)
 
-    def update(self):
+    def update(self, player=None):
         self.movement()
+        self.change_blue(player)
         self.rect.x += self.x_change
         self.rect.y += self.y_change
+        self.collide_player(player)
         self.collide_blocks(self.dir)
 
         self.x_change = 0
@@ -94,3 +101,26 @@ class Enemy(pygame.sprite.Sprite):
             self.x_change -= settings.ENEMY_SPEED
         elif self.dir == 4:     # Moving right
             self.x_change += settings.ENEMY_SPEED
+
+    def collide_player(self, player):
+        hits = pygame.sprite.spritecollide(self, self.game.player_sprit, False)
+        if hits:
+            if player.boosted:
+                self.kill()
+                player.points += 100
+                player.kills += 1
+                print("killed")
+            else:
+                player.kill()
+                self.game.playing = False
+
+    def change_blue(self, player):
+        if self.which_image == 'normal' and player.boosted:
+            self.which_image = 'blue'
+            self.image = self.blue_image
+            self.dir = random.choice([1, 2, 3, 4])
+        elif self.which_image == 'blue' and not player.boosted:
+            self.which_image = 'normal'
+            self.image = self.normal_image
+        else:
+            pass

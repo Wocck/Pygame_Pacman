@@ -27,12 +27,30 @@ class Coin(pygame.sprite.Sprite):
         self.groups = self.game.coins, self.game.all_sprites
         pygame.sprite.Sprite.__init__(self, self.groups)
 
-        self.x = x * settings.TILE_SIZE + 5
-        self.y = y * settings.TILE_SIZE + 5
+        self.x = x * settings.TILE_SIZE + 7.5
+        self.y = y * settings.TILE_SIZE + 7.5
         self.width = settings.COIN_SIZE
         self.height = settings.COIN_SIZE
 
-        self.image = pygame.image.load(settings.COIN_IMG_10P).convert()
+        self.image = pygame.image.load(settings.COIN_IMG_5P).convert()
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+
+
+class Energizer(pygame.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self.game = game
+        self._layer = settings.COINS_LAYER
+        self.groups = self.game.energizers, self.game.all_sprites
+        pygame.sprite.Sprite.__init__(self, self.groups)
+
+        self.x = x * settings.TILE_SIZE + 2.5
+        self.y = y * settings.TILE_SIZE + 2.5
+        self.width = 15
+        self.height = 15
+
+        self.image = pygame.image.load(settings.FLASH_20P).convert()
         self.rect = self.image.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
