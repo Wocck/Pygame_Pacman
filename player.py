@@ -36,6 +36,7 @@ class Player(pygame.sprite.Sprite):
         self.boosted = False
         self.boost_start_time = 0
         self.kills = 0
+        self.coins_eaten = 0
 
     def update(self, player=None):
         self.movement()
@@ -47,6 +48,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.y += self.y_change
         self.collide_blocks('y')
         self.collide_coins()
+        self.check_win()
         self.collide_energizer()
         if self.boosted:
             self.check_boost_time()
@@ -89,6 +91,12 @@ class Player(pygame.sprite.Sprite):
         hits = pygame.sprite.spritecollide(self, self.game.coins, True)
         if hits:
             self.points += 1
+            self.coins_eaten += 1
+
+    def check_win(self):
+        if self.coins_eaten == 283:
+            self.game.playing = False
+            self.game.won = True
 
     def animate(self):
         self.image = self.images_facing[self.facing-1]
@@ -101,7 +109,7 @@ class Player(pygame.sprite.Sprite):
             hits = None
 
     def check_boost_time(self):
-        if pygame.time.get_ticks() - self.boost_start_time > 8000:
+        if pygame.time.get_ticks() - self.boost_start_time > 6000:
             self.boosted = False
             self.boost_start_time = 0
             for i in range(self.kills):

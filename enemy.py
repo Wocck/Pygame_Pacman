@@ -109,7 +109,6 @@ class Enemy(pygame.sprite.Sprite):
                 self.kill()
                 player.points += 100
                 player.kills += 1
-                print("killed")
             else:
                 player.kill()
                 self.game.playing = False
