@@ -50,7 +50,7 @@ class Energizer(pygame.sprite.Sprite):
         self.width = 15
         self.height = 15
 
-        self.image = pygame.image.load(settings.FLASH_20P).convert()
+        self.image = pygame.image.load(settings.FLASH_15P).convert()
         self.rect = self.image.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y

@@ -1,9 +1,13 @@
-# Main Window
+# MAIN WINDOW
 WIN_WIDTH = 560
 WIN_HEIGHT = 680
 TILE_SIZE = 20
 
-# Layers
+# INTRO WINDOW
+INTRO_WIDTH = 680
+INTRO_HEIGHT = 538
+
+# LAYERS
 PLAYER_LAYER = 5
 ENEMY_LAYER = 4
 COINS_LAYER = 3
@@ -25,24 +29,17 @@ ENEMY_SIZE = 20
 COIN_SIZE = 5
 
 # IMAGES
-PACMAN_IMG_20P = 'images/pac_man_20pix.png'
+INTRO_IMG = 'images/intro_srceen_680x538.png'
+MAZE_IMG = 'images/maze.png'
 PACMAN_REL_IMG_20P = 'images/pac_man_real_20pix.png'
-PACMAN_IMG_18P = 'images/pac_man_18pix.png'
-PACMAN_IMG_17P = 'images/pac_man_17pix.png'
 REAL_PACMAN_18P = 'images/real_pacman_18pix.png'
 PACMAN_UP = 'images/pacman_up.png'
 PACMAN_DOWN = 'images/pacman_d.png'
 PACMAN_RIGHT = 'images/pacman_r.png'
 PACMAN_LEFT = 'images/pacman_l.png'
-
-MAZE_IMG = 'images/maze.png'
-COIN_IMG_16P = 'images/virus_2.png'
 COIN_IMG_5P = 'images/coin_5pix.png'
-COIN_IMG_10P = 'images/dot_10pix.png'
-ENEMY_IMG_20P = 'images/enemy_20pix.png'
 GHOST_20P = 'images/ghost_20pix.png'
 BLUE_GHOST_20P = 'images/blue_ghost_20pix.png'
-FLASH_20P = 'images/flash_20pix.png'
 FLASH_15P = 'images/flash_15pix.png'
 
 # FONTS
