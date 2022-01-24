@@ -12,6 +12,17 @@ from maze import Block, Coin, Energizer
 
 
 def blit_multiline_text(surface, text, pos, font):
+    '''
+    Function bliting Multiline text to surface.
+    Contain arguments:
+    :param surface: pygame.display where text should be blit
+    :type surface: pygame.display
+    :param text: text to blit
+    :type text: str
+    :param pos: (x, y) positoon tuple
+    :param font: pygame.font.Font font to render text with
+
+    '''
     color = settings.WHITE
     words = [word for word in text.splitlines()]
     max_width, max_height = surface.get_size()
@@ -27,6 +38,21 @@ def blit_multiline_text(surface, text, pos, font):
 
 
 class Game:
+    '''
+    Class Game. Contains all game related stuff and initializes pygame.
+    Contains all game and menu handling, updating sprites and drawing methods.
+    Contains attributes:
+    :param screen_intro: Menu screen display
+    :param clock: pygame.time.Clock() (to set FPS)
+    :param score_font: font for displaying text
+    :param running: Boolean controling whole program
+    :param running_highscores: Boolean controling high scores window
+    :param intro_img: pygame.image contains menu image
+    :param highscore_list: list containing all high scores loaded from csv file
+    :type highscore_list: ScoreTable
+    :param self.won: Boolean controls if Pacman won or lost game
+
+    '''
     def __init__(self) -> None:
         pygame.init()
         self.screen_intro = pygame.display.set_mode(
@@ -34,9 +60,8 @@ class Game:
         )
         self.maze_image = pygame.image.load(settings.MAZE_IMG).convert()
         self.clock = pygame.time.Clock()
-        self.font_name = settings.FONT_TWO
-        self.score_font = pygame.font.Font(self.font_name, 40)
-        self.high_score_font = pygame.font.Font(self.font_name, 40)
+        font_name = settings.FONT_TWO
+        self.score_font = pygame.font.Font(font_name, 40)
         self.running = True
         self.running_highscores = False
         self.intro_img = pygame.image.load(settings.INTRO_IMG).convert()
@@ -44,6 +69,10 @@ class Game:
         self.won = False
 
     def create_map(self):
+        '''
+        Method creating maze  with Ghosts, Pacman, Coins, Energizers
+        and Blocks from settings.MAP list
+        '''
         for i, row in enumerate(settings.MAP):
             for j, column in enumerate(row):
                 if column == ".":
@@ -56,10 +85,12 @@ class Game:
                     Enemy(self, j, i)
                 elif column == "O":
                     Energizer(self, j, i)
-                # elif column == "G":
-                #     print(f'{j*20}, {i*20}')
 
     def new(self):
+        '''
+        Method creating sprites groups and calling create_map method
+
+        '''
         self.playing = True
         self.all_sprites = pygame.sprite.LayeredUpdates()
         self.blocks = pygame.sprite.LayeredUpdates()
@@ -70,17 +101,24 @@ class Game:
         self.create_map()
 
     def events(self):
-        # Game Loop Events
+        '''
+        Method with Game Loop events, checking if player didn't exit from game
+        '''
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
                 self.playing = False
 
     def update(self):
-        # Game Loop Updates
+        '''
+        Method updating all_sprites group
+        '''
         self.all_sprites.update(self.player)
 
     def draw(self):
+        '''
+        Method drawing maze, score and all_sprites group and updating display
+        '''
         self.screen.fill(settings.BLACK)
         self.screen.blit(self.maze_image, (0, 0))
         self.draw_score()
@@ -89,6 +127,9 @@ class Game:
         pygame.display.update()
 
     def draw_score(self):
+        '''
+        Method drawing Score while playing Game
+        '''
         score = self.player.points
         text = f"Score = {score}"
         text_surface = self.score_font.render(text, False, settings.WHITE)
@@ -98,13 +139,20 @@ class Game:
         self.screen.blit(text_surface, text_rect)
 
     def main(self):
-        # Game Loop
+        '''
+        Just Game loop controlled by playing boolean
+        calling all game related methods
+        '''
         while self.playing:
             self.events()
             self.update()
             self.draw()
 
     def game_over(self):
+        '''
+        Game over Method kills (deletes) all sprites, saves highscores list
+        and runs intro screen Method with True and player_score
+        '''
         player_score = self.player.points
         for sprite in self.all_sprites:
             sprite.kill()
@@ -113,6 +161,14 @@ class Game:
         self.intro_screen(True, player_score)
 
     def high_scores(self):
+        '''
+        Method displaying highscores window
+        Creates button and list of highscores to display
+        than checks if player quited, than if player clicked 'back' button
+        than blits to screen highscores with blit_multiline_text() function
+        :returns: True if player exited with 'back' button if closed False
+        :rtype: bool
+        '''
         if self.running_highscores:
             back_button = Button(
                 290, 450, 110, 50, settings.WHITE, settings.BLUE, 'BACK', 42
@@ -135,12 +191,26 @@ class Game:
                 blit_multiline_text(
                     self.screen_intro, highscores_str,
                     (230, 15),
-                    self.high_score_font
+                    self.score_font
                 )
                 pygame.display.update()
         return True
 
     def intro_screen(self, second, player_score=None):
+        '''
+            Method displaying Menu screen
+            param: second: determines if this is first execution of method
+            type: second: bool
+            param: player_score: saved player score to display in menu window
+            type: player_score: int
+            Creates 2 buttons for Playing and entering high scores window
+            If second execution (or third,...) display game result and points
+            Than display rest of menu window with buttons
+            If Highscores button is prest run highscores method
+            if Play button is pressed exit while loop and create new game
+            The only way to exit this method is to run new game or close window
+
+        '''
         intro = True
         play_button = Button(
             290, 300, 110, 50, settings.WHITE, settings.BLUE, 'PLAY', 42

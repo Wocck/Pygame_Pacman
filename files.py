@@ -22,6 +22,10 @@ class InvalidScoreTableDataError(Exception):
 
 
 class ScoreTable:
+    '''
+    Class ScoreTable. Contains attributes:
+    :param score_table: list of highscores
+    '''
     def __init__(self, score_table) -> None:
         if len(score_table) > 9:
             raise InvalidScoreTableDataError('Max 9 highscores!')
@@ -31,6 +35,10 @@ class ScoreTable:
         self.score_table = score_table
 
     def add_score(self, score):
+        '''
+        add score than sort and delete last element if length of score list
+        is grater than 9
+        '''
         if score not in self.score_table:
             self.score_table.append(score)
             self.score_table.sort(reverse=True)
@@ -38,6 +46,9 @@ class ScoreTable:
                 self.score_table.pop()
 
     def __str__(self) -> str:
+        '''
+        just __str__ method creating string fomr list
+        '''
         list = ''
         for index, score in enumerate(self.score_table):
             list += f'{index+1}.    {score:5}\n'
@@ -45,6 +56,9 @@ class ScoreTable:
 
 
 def load(path):
+    '''
+    Load high scores from file
+    '''
     try:
         with open(path, 'r') as file_handle:
             return read_from_file_csv(file_handle)
@@ -57,6 +71,9 @@ def load(path):
 
 
 def save(path, scores):
+    '''
+    Save high scores to file
+    '''
     try:
         with open(path, 'w') as file_handle:
             return write_to_file_csv(file_handle, scores)
@@ -69,6 +86,9 @@ def save(path, scores):
 
 
 def read_from_file_csv(file_handle):
+    '''
+    Read high scores to file
+    '''
     scores = []
     csv_reader = csv.DictReader(file_handle)
     for row in csv_reader:
@@ -82,6 +102,9 @@ def read_from_file_csv(file_handle):
 
 
 def write_to_file_csv(file_handle, scores):
+    '''
+    Write high scores to file
+    '''
     writer = csv.DictWriter(
         file_handle,
         ['score']

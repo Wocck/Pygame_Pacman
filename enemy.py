@@ -4,6 +4,24 @@ import random
 
 
 class Enemy(pygame.sprite.Sprite):
+    '''
+    Class Enemy. Contains attributes:
+    :param game: Game to be assigned with
+    :param _layer: sets sprite layer
+    :param groups: contains object sprite groups
+    :param x: pixel position x (1 dot in settings.MAP equals 20 pixels)
+    :param y: Pixel position y (1 dot in settings.MAP equals 20 pixels)
+    :param width: Pixel width of sprite
+    :param height: Pixel height of sprite
+    :param x_change: value of x position change
+    :param y_change: value of y position change
+    :param normal_image: pygame.image when Ghost is in normal state
+    :param blue_image: pygame.image when Ghost is in 'can be eaten' state
+    :param which_image: tells in wchich image is displaying
+    :param rect: pygame.image.rect object
+    :param dir: direction in which Ghost is moving
+
+    '''
     def __init__(self, game, x, y):
         self.game = game
         self._layer = settings.ENEMY_LAYER
@@ -31,6 +49,13 @@ class Enemy(pygame.sprite.Sprite):
         self.dir = random.randint(1, 4)
 
     def update(self, player=None):
+        '''
+        Update Method, updating Ghosts Sprite.
+        Calls movement, change image, collide blocks and player methods
+        Takes argument:
+        :param player: passing Player to tell if Ghost ate or has been eaten
+
+        '''
         self.movement()
         self.change_blue(player)
         self.rect.x += self.x_change
@@ -42,6 +67,15 @@ class Enemy(pygame.sprite.Sprite):
         self.y_change = 0
 
     def collide_blocks(self, direction):
+        '''
+        Most important method of Enemy class. Contains directions by which
+        Ghost are moving. Basicly checks if Ghost is in any type of crossing
+        and handles each type seperately (randomly choosing next direction).
+        Coordinates and types of crossing are imported from settings.py file.
+        Takes argument:
+        :param direction: current direction of Ghost
+        :type direction: int
+        '''
         pos = (self.rect.x, self.rect.y)
         hits = pygame.sprite.spritecollide(self, self.game.blocks, False)
         if direction in (3, 4):
@@ -93,6 +127,10 @@ class Enemy(pygame.sprite.Sprite):
                     self.dir = random.choice([1, 3, 4])
 
     def movement(self):
+        '''
+        Method changing z/y_change of ghost with ENEMY_SPEED
+        (depending on direction)
+        '''
         if self.dir == 1:   # Moving up
             self.y_change -= settings.ENEMY_SPEED
         elif self.dir == 2:     # Moving down
@@ -103,6 +141,13 @@ class Enemy(pygame.sprite.Sprite):
             self.x_change += settings.ENEMY_SPEED
 
     def collide_player(self, player):
+        '''
+        Method checking if Pacman was callided and in what state was
+        when collison happened. If 'Boosted' than Ghost dies and ads points
+        else Pacman dies, end of the game
+        Takes argument:
+        :param player: Player class object
+        '''
         hits = pygame.sprite.spritecollide(self, self.game.player_sprit, False)
         if hits:
             if player.boosted:
@@ -114,6 +159,11 @@ class Enemy(pygame.sprite.Sprite):
                 self.game.playing = False
 
     def change_blue(self, player):
+        '''
+        Method changing image of Ghost when Pacman is 'Boosted'
+        Takes argument:
+        :param player: Player class object
+        '''
         if self.which_image == 'normal' and player.boosted:
             self.which_image = 'blue'
             self.image = self.blue_image

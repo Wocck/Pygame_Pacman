@@ -3,6 +3,17 @@ import settings
 
 
 class Block(pygame.sprite.Sprite):
+    '''
+    Class Block. Contains attributes:
+    :param game: Game to be assigned with
+    :param _layer: sets sprite layer
+    :param groups: contains object sprite groups
+    :param x: pixel position x (1 dot in settings.MAP equals 20 pixels)
+    :param y: Pixel position y (1 dot in settings.MAP equals 20 pixels)
+    :param width: Pixel width of sprite
+    :param height: Pixel height of sprite
+    :param image: just pygame.surface
+    '''
     def __init__(self, game, x, y):
         self.game = game
         self._layer = settings.BLOCK_LAYER
@@ -21,14 +32,25 @@ class Block(pygame.sprite.Sprite):
 
 
 class Coin(pygame.sprite.Sprite):
+    '''
+    Class Block. Contains attributes:
+    :param game: Game to be assigned with
+    :param _layer: sets sprite layer
+    :param groups: contains object sprite groups
+    :param x: pixel position x (1 dot in settings.MAP equals 20 pixels)
+    :param y: Pixel position y (1 dot in settings.MAP equals 20 pixels)
+    :param width: Pixel width of sprite
+    :param height: Pixel height of sprite
+    :param image: coin image
+    '''
     def __init__(self, game, x, y):
         self.game = game
         self._layer = settings.COINS_LAYER
         self.groups = self.game.coins, self.game.all_sprites
         pygame.sprite.Sprite.__init__(self, self.groups)
 
-        self.x = x * settings.TILE_SIZE + 7.5
-        self.y = y * settings.TILE_SIZE + 7.5
+        self.x = x * settings.TILE_SIZE + 7.5  # +7.5 for centering
+        self.y = y * settings.TILE_SIZE + 7.5  # +2.5 for centering
         self.width = settings.COIN_SIZE
         self.height = settings.COIN_SIZE
 
@@ -39,14 +61,25 @@ class Coin(pygame.sprite.Sprite):
 
 
 class Energizer(pygame.sprite.Sprite):
+    '''
+    Class Block. Contains attributes:
+    :param game: Game to be assigned with
+    :param _layer: sets sprite layer
+    :param groups: contains object sprite groups
+    :param x: pixel position x (1 dot in settings.MAP equals 20 pixels)
+    :param y: Pixel position y (1 dot in settings.MAP equals 20 pixels)
+    :param width: Pixel width of sprite
+    :param height: Pixel height of sprite
+    :param image: Energizer image
+    '''
     def __init__(self, game, x, y):
         self.game = game
         self._layer = settings.COINS_LAYER
         self.groups = self.game.energizers, self.game.all_sprites
         pygame.sprite.Sprite.__init__(self, self.groups)
 
-        self.x = x * settings.TILE_SIZE + 2.5
-        self.y = y * settings.TILE_SIZE + 2.5
+        self.x = x * settings.TILE_SIZE + 2.5  # +2.5 for centering
+        self.y = y * settings.TILE_SIZE + 2.5  # +2.5 for centering
         self.width = 15
         self.height = 15
 

@@ -1,5 +1,7 @@
 from game import Game
-
+'''
+Just initializing game and setting while running loop
+'''
 
 g = Game()
 g.intro_screen(False)

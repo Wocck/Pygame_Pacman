@@ -3,6 +3,19 @@ import settings
 
 
 class Button:
+    '''
+    Class Button. Contains attributes:
+    :param font: pygame.font
+    :param content: text
+    :param x: pixel position x
+    :param y: Pixel position y
+    :param width: Pixel width of button
+    :param height: Pixel height of button
+    :param fg: foreground
+    :param bg: background
+    :param image: pygame.Surface
+
+    '''
     def __init__(self, x, y, width, height, fg, bg, content, fontsize) -> None:
         font = settings.FONT_TWO
         self.font = pygame.font.Font(font, fontsize)
@@ -31,6 +44,9 @@ class Button:
         self.image.blit(self.text, self.text_rect)
 
     def is_pressed(self, pos, pressed):
+        '''
+        Method checking if mouse pressed button
+        '''
         if self.rect.collidepoint(pos):
             if pressed[0]:
                 return True
