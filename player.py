@@ -60,7 +60,7 @@ class Player(pygame.sprite.Sprite):
         self.kills = 0
         self.coins_eaten = 0
 
-    def update(self):
+    def update(self, player=None):
         '''
         Pacman update Method calling Animate, Movement, Block, Coin
         and Energizer collison and checking if win
