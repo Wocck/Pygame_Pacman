@@ -8,7 +8,7 @@ INTRO_WIDTH = 680
 INTRO_HEIGHT = 538
 
 # HIGHSCORES WINDOW
-HIGHSCORES_CSV = 'highscores.csv'
+HIGHSCORES_CSV = 'game_data/highscores.csv'
 
 # LAYERS
 PLAYER_LAYER = 5

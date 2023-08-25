@@ -1,4 +1,4 @@
-from game import Game
+from src.controllers.game import Game
 '''
 Just initializing game and setting while running loop
 '''

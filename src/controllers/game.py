@@ -1,14 +1,14 @@
 import pygame
-from enemy import Enemy
-from files import (
+from src.controllers.enemy import Enemy
+from src.file_management.files import (
     ScoreTable,
     save,
     load
 )
-from menu import Button
-from player import Player
-import settings
-from maze import Block, Coin, Energizer
+from src.controllers.menu import Button
+from src.controllers.player import Player
+from src.settings import settings
+from src.views.maze import Block, Coin, Energizer
 
 
 def blit_multiline_text(surface, text, pos, font):

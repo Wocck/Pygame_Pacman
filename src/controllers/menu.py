@@ -1,5 +1,5 @@
 import pygame
-import settings
+from src.settings import settings
 
 
 class Button:

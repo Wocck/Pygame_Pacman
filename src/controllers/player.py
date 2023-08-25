@@ -1,6 +1,6 @@
 import pygame
-import settings
-from enemy import Enemy
+from src.settings import settings
+from src.controllers.enemy import Enemy
 
 
 class Player(pygame.sprite.Sprite):
